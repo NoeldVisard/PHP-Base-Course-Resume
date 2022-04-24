@@ -8,7 +8,7 @@
     <div id="login-box">
         <div class="left">
             <h1>Sign up</h1>
-                <form action="localhost:8080/page2name" method="post">
+                <form action="http://localhost:8080/registrationController" method="post">
                 <input type="text" name="username" placeholder="Username" />
                 <input type="text" name="email" placeholder="E-mail" />
                 <input type="password" name="password" placeholder="Password" />
