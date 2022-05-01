@@ -2,9 +2,10 @@
 
 namespace app\controllers;
 
+use app\core\Controller;
 use app\core\Request;
 
-class RegistrationController
+class RegistrationController extends Controller
 {
     public function handleRegistration(Request $request)
     {
@@ -17,6 +18,7 @@ class RegistrationController
 
     public function registration()
     {
-
+        $template = 'registration';
+        $this->render($template);
     }
 }
