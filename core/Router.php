@@ -9,9 +9,9 @@ class Router
     public array $routes = [];
     public Request $request;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->request = new Request();
+        $this->request = $request;
     }
 
 
