@@ -8,10 +8,12 @@ class Router
 {
     public array $routes = [];
     public Request $request;
+    public Response $response;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
 
 
@@ -37,6 +39,10 @@ class Router
 
         if (is_array($callback)) {
             return call_user_func($callback, $this->request);
+        }
+
+        if ($callback === false) {
+            $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
     }
 
