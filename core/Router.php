@@ -33,7 +33,7 @@ class Router
     {
         $method = $this->request->getMethod();
         $path = $this->request->getPath();
-        $callback = $this->routes[$method][$path];
+        $callback = $this->routes[$method][$path] ?? false;
 
         if (is_string($callback)) {
             $this->renderView($callback);
