@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace app\core;
 
+use Exception;
+
 class Application
 {
     public Router $router;
@@ -22,7 +24,11 @@ class Application
 
     public function run()
     {
-        $this->router->resolve();
+        try {
+            $this->router->resolve();
+        } catch (Exception $e) {
+            $this->response->setStatusCode(Response::HTTP_SERVER_ERROR);
+        }
     }
 
 

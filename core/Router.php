@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace app\core;
 
+use Exception;
+
 class Router
 {
     public array $routes = [];
@@ -44,6 +46,8 @@ class Router
         if ($callback === false) {
             $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
+        throw new Exception("Not existing type");
     }
 
     public function renderView($template)
