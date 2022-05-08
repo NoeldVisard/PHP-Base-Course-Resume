@@ -51,8 +51,9 @@ class RegistrationController extends Controller
         return $password === $password2;
     }
 
-    private function isMailNotExist(mixed $email)
+    private function isMailNotExist(mixed $email): bool
     {
         // TODO: isMailNotExist in database
+        return true;
     }
 }
