@@ -9,6 +9,11 @@ use app\core\Application;
 
 require_once __DIR__."/vendor/autoload.php";
 
+if (getenv('APP_ENV') === 'dev') {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+}
+
 $app = new Application();
 
 // Here is created a mapping of paths and files to open.0
