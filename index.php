@@ -6,8 +6,15 @@ namespace app;
 
 use app\controllers\RegistrationController;
 use app\core\Application;
+use app\core\ConfigParser;
 
 require_once __DIR__."/vendor/autoload.php";
+(new ConfigParser(__DIR__ . '/../.env'))->load();
+
+if (getenv('APP_ENV') === 'dev') {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+}
 
 $app = new Application();
 
