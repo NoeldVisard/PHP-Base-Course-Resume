@@ -35,6 +35,9 @@ class Router
         $path = $this->request->getPath();
         $callback = $this->routes[$method][$path] ?? false;
 
+//         Work of Logger.php:
+//        $callback = 1;
+
         if (is_string($callback)) {
             $this->renderView($callback);
         }

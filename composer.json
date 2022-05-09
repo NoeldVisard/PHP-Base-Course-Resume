@@ -12,5 +12,7 @@
             "email": "Rodion.Karimov@tatar.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "psr/log": "^3.0"
+    }
 }
