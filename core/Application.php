@@ -13,7 +13,8 @@ class Application
     public Request $request;
     public Response $response;
     public static Application $app;
-    private Logger $logger;
+    public Logger $logger;
+    public Database $database;
 
     public function __construct()
     {
@@ -23,6 +24,12 @@ class Application
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
         $this->logger = new Logger(__DIR__ . getenv('LOG_FILE'));
+        // TODO: Fix config parser
+        $dsn = "pgsql";
+        $user = "postgres";
+        $password = "postgres";
+//        $this->database = new Database($_ENV['DB_DSN'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+        $this->database = new Database($dsn, $user, $password);
     }
 
     public function run()

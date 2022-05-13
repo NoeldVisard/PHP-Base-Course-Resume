@@ -20,13 +20,43 @@ class ConfigParser
             if ($line[0] !== '#' && $line[0] !== '{' && $line[0] !== '}') {
                 [$key, $value] = explode(':', $line);
                 $value = substr($value, 0, -1);
+//                echo '$key:' . $key . ' $value: ' . $value . '<br>';
+
+                $isValueValid = true;
+                $isKeyValid = true;
+                // TODO: Create function *isValueString*. Use here, in 40-48 lines. In future, when i will redo second if, change logic also.
                 if ($value[0] === "\"" && $value[strlen($value) - 1] === "\"") {
                     $value = substr($value, 1);
                     $value = substr($value, 0, -1);
                 }
-                $_SERVER[$key] = $value;
-                $_ENV[$key] = $value;
-                putenv("{$key}={$value}");
+
+                if (count(explode('=', $key)) === 2) {
+                    [$newKey, $newValue] = explode('=', $key);
+                    $_SERVER[$newKey] = $newValue;
+                    $_ENV[$newKey] = $newValue;
+                    putenv("{$newKey}={$newValue}");
+                    $isKeyValid = false;
+                }
+
+                if (count(explode(';', $value)) > 1) {
+                    $keysValues = explode(';', $value);
+                    foreach ($keysValues as $keyValue) {
+                        [$newKey, $newValue] = explode('=', $keyValue);
+                        $_SERVER[$newKey] = $newValue;
+                        $_ENV[$newKey] = $newValue;
+                        putenv("{$newKey}={$newValue}");
+                    }
+                    $isValueValid = false;
+                }
+
+                if ($isKeyValid && $isValueValid) {
+                    $_SERVER[$key] = $value;
+                    $_ENV[$key] = $value;
+                    putenv("{$key}={$value}");
+                }
+
+//                echo '<br>';
+//                echo '$key:' . $key . ' $value: ' . $value . '<br>';
             }
         }
     }

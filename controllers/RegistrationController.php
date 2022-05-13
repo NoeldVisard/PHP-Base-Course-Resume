@@ -19,6 +19,16 @@ class RegistrationController extends Controller
             } catch (FileSystemException $e) {
                 Application::$app->response->setStatusCode(Response::HTTP_SERVER_ERROR);
             }
+
+//            $dbConnection = Application::$app->database->pdo; // TODO: fix error $pdo must not be accessed before initialization
+            $dbConnection = new \PDO("pgsql:host=localhost;port=5432;dbname=resume", "postgres", "postgres");
+            $sqlStatement = "INSERT INTO \"user\" (username, email, password) VALUES (:username, :email, :password)";
+            $statement = $dbConnection->prepare($sqlStatement);
+            $statement->execute([
+                ':username' => 'user2',
+                ':email' => 'mailVisa',
+                ':password' => 'pass'
+                ]);
             exit;
         }
     }
