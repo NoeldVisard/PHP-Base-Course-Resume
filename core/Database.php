@@ -11,14 +11,14 @@ class Database
     public PDO $pdo;
 
     /**
-     * @param string $DB_DSN
-     * @param string $DB_USER
-     * @param string $DB_PASSWORD
+     * @param string $DbDsn
+     * @param string $DbUser
+     * @param string $DbPassword
      */
-    public function __construct(string $DB_DSN, string $DB_USER, string $DB_PASSWORD)
+    public function __construct(string $DbDsn, string $DbUser, string $DbPassword)
     {
         try {
-            $this->pdo = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+            $this->pdo = new PDO($DbDsn, $DbUser, $DbPassword);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             Application::$app->logger->log(LogLevel::ERROR, $e->getMessage());
