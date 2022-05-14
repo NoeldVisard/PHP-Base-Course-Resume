@@ -7,6 +7,7 @@ use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\exceptions\FileSystemException;
+use app\mappers\UserMapper;
 use app\models\User;
 
 class RegistrationController extends Controller
@@ -21,8 +22,11 @@ class RegistrationController extends Controller
                 Application::$app->response->setStatusCode(Response::HTTP_SERVER_ERROR);
             }
 
-            $registerModel = (new User())->assign($body);
-            $registerModel->save();
+//            $registerModel = (new User())->assign($body);
+//            $registerModel->save();
+            $user = new User($body['username'], $body['email'], $body['password']);
+            $mapper = new UserMapper();
+            $mapper->insert($user);
         }
     }
 
