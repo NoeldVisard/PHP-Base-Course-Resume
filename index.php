@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app;
 
+use app\controllers\NotFoundController;
 use app\controllers\RegistrationController;
 use app\core\Application;
 use app\core\ConfigParser;
@@ -24,5 +25,6 @@ $app = new Application();
 $app->router->get('/', 'welcome');
 $app->router->get('/registration', [new RegistrationController(), 'registration']);
 $app->router->post('/registrationController', [new RegistrationController(), 'handleRegistration']);
+$app->router->get('/404', [new NotFoundController(), 'notFound']);
 
 $app->run();

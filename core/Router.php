@@ -48,6 +48,8 @@ class Router
 
         if ($callback === false) {
             $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
+            header("Location: http://localhost:8080/404");
+            exit;
         }
 
         throw new Exception("Not existing type");
