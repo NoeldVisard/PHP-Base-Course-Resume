@@ -17,10 +17,9 @@ class UserMapper extends Mapper
     {
         parent:: __construct();
 //        $this->select = $this->getPdo()->prepare("SELECT * FROM \"user\" WHERE id = ?");
-        $this->update = $this->getPdo()->prepare("UPDATE \"user\" SET username = :username, email = :email WHERE id = :id");
+        $this->update = $this->getPdo()->prepare("UPDATE \"user\" SET username = :username, email = :email, password = :password WHERE id = :id");
         $this->delete = $this->getPdo()->prepare("DELETE FROM \"user\" WHERE id = :id");
-        $insertSql = "INSERT INTO \"user\" (username, email) VALUES (:username, :email)";
-        $this->insert = $this->getPdo()->prepare($insertSql);
+        $this->insert = $this->getPdo()->prepare("INSERT INTO \"user\" (username, email, password) VALUES (:username, :email, :password)");
     }
 
     protected function doInsert(Model $object): Model
@@ -28,11 +27,13 @@ class UserMapper extends Mapper
         $this->insert->execute(
             [
                 'username' => $object->getUsername(),
-                'email' => $object->getEmail()
+                'email' => $object->getEmail(),
+                'password' => $object->getPassword(),
             ]
         );
 
-        $object->setId((int)$rowId = $this->getPdo()->lastInsertId());
+        $rowId = $this->getPdo()->lastInsertId();
+        $object->setId((int)$rowId);
         return $object;
     }
 
