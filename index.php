@@ -9,7 +9,7 @@ use app\core\Application;
 use app\core\ConfigParser;
 
 require_once __DIR__."/vendor/autoload.php";
-(new ConfigParser(__DIR__ . '/.env'))->load();
+(new ConfigParser(__DIR__ . '/env.json'))->load();
 
 if (getenv('APP_ENV') === 'dev') {
     error_reporting(E_ALL);
