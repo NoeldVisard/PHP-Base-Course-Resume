@@ -95,12 +95,15 @@ class UserMapper extends Mapper
         return $this;
     }
 
-    public function findByEmail(String $email): Model
+    public function findByEmail(String $email): ?Model
     {
         $this->findByEmail->execute([
             'email' => $email
         ]);
-        $row = $this->findByEmail->fetch();
-        return $this->create($row);
+        $row = $this->findByEmail->fetch(); // TODO: Custom UserNotFoundException
+        if ($row) {
+            return $this->create($row);
+        }
+        return null;
     }
 }

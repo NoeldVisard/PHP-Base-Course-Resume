@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app;
 
+use app\controllers\LoginController;
 use app\controllers\NotFoundController;
 use app\controllers\RegistrationController;
 use app\core\Application;
@@ -26,5 +27,7 @@ $app->router->setGetPath('/', 'welcome');
 $app->router->setGetPath('/registration', [new RegistrationController(), 'registrationPage']);
 $app->router->setPostPath('/registrationController', [new RegistrationController(), 'registration']);
 $app->router->setGetPath('/404', [new NotFoundController(), 'notFound']);
+$app->router->setGetPath('/login', [new LoginController(), 'loginPage']);
+$app->router->setPostPath('/loginController', [new LoginController(), 'login']);
 
 $app->run();
