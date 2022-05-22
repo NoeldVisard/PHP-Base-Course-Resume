@@ -16,6 +16,8 @@ class UserMapper extends Mapper
     private \PDOStatement $find;
     private \PDOStatement $findAll;
 
+    private \PDOStatement $findByEmail;
+
     public function __construct()
     {
         parent:: __construct();
@@ -25,6 +27,8 @@ class UserMapper extends Mapper
         $this->insert = $this->getPdo()->prepare("INSERT INTO \"user\" (username, email, password) VALUES (:username, :email, :password)");
         $this->find = $this->getPdo()->prepare("SELECT * FROM \"user\" WHERE  id = :id");
         $this->findAll = $this->getPdo()->prepare("SELECT * FROM \"user\"");
+
+        $this->findByEmail = $this->getPdo()->prepare("SELECT * FROM \"user\" WHERE email = :email");
     }
 
     protected function doInsert(Model $object): Model
@@ -89,5 +93,14 @@ class UserMapper extends Mapper
     protected function getMapper(): Mapper
     {
         return $this;
+    }
+
+    public function findByEmail(String $email): Model
+    {
+        $this->findByEmail->execute([
+            'email' => $email
+        ]);
+        $row = $this->findByEmail->fetch();
+        return $this->create($row);
     }
 }
