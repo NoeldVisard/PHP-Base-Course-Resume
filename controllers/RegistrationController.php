@@ -27,6 +27,13 @@ class RegistrationController extends Controller
             $user = new User($body['username'], $body['email'], $body['password']);
             $mapper = new UserMapper();
             $mapper->insert($user);
+
+//             Examples
+//            $user = $mapper->find(11);
+//            var_dump($user);
+
+//            $rows = $mapper->findAll()->getNextRow();
+//            var_dump($rows->current());
         }
     }
 

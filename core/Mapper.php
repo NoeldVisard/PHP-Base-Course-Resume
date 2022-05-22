@@ -13,9 +13,9 @@ abstract class Mapper
         $this->pdo = Application::$app->database->pdo;
     }
 
-    public function create(): Model
+    public function create(array $object): Model
     {
-
+        return $this->doCreate($object);
     }
 
 //    public function read(): Model
@@ -38,12 +38,31 @@ abstract class Mapper
         return $this->doInsert($model);
     }
 
-//    public function select()
+    public function find(int $id): ?Model
+    {
+        $this->select()->execute([
+            'id' => $id
+        ]);
+        $row = $this->select()->fetch();
 
-    abstract protected function doInsert(Model $object): Model;
-    abstract protected function doUpdate(Model $object): void;
-    abstract protected function doDelete(Model $object): void;
-    abstract protected function doCreate(array $object): Model;
+        if (!is_array($row)) {
+            return null;
+        }
+
+        if (!isset($row['id'])) {
+            return null;
+        }
+
+        return $this->create($row);
+    }
+
+    public function findAll(): Collection
+    {
+        $this->selectAll()->execute();
+        $rows = $this->selectAll()->fetchAll();
+
+        return new Collection($rows, $this->getMapper());
+    }
 
     /**
      * @return \PDO
@@ -52,5 +71,13 @@ abstract class Mapper
     {
         return $this->pdo;
     }
+
+    abstract protected function doInsert(Model $object): Model;
+    abstract protected function doUpdate(Model $object): void;
+    abstract protected function doDelete(Model $object): void;
+    abstract protected function doCreate(array $object): Model;
+    abstract protected function select(): \PDOStatement;
+    abstract protected function selectAll(): \PDOStatement;
+    abstract protected function getMapper(): Mapper;
 
 }
