@@ -23,8 +23,8 @@ $app = new Application();
 
 // Here is created a mapping of paths and files to open.
 $app->router->setGetPath('/', 'welcome');
-$app->router->setGetPath('/registration', [new RegistrationController(), 'registration']);
-$app->router->setPostPath('/registrationController', [new RegistrationController(), 'register']);
+$app->router->setGetPath('/registration', [new RegistrationController(), 'registrationPage']);
+$app->router->setPostPath('/registrationController', [new RegistrationController(), 'registration']);
 $app->router->setGetPath('/404', [new NotFoundController(), 'notFound']);
 
 $app->run();

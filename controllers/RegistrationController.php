@@ -12,7 +12,7 @@ use app\models\User;
 
 class RegistrationController extends Controller
 {
-    public function register(Request $request)
+    public function registration(Request $request)
     {
         $body = $request->getBody();
         if ($this->isPasswordsEquals($body["password"], $body["password2"]) && $this->isMailNotExist($body["email"])) {
@@ -37,7 +37,7 @@ class RegistrationController extends Controller
         }
     }
 
-    public function registration()
+    public function registrationPage()
     {
         $template = 'registration';
         $this->render($template);
