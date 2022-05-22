@@ -12,7 +12,7 @@ use app\models\User;
 
 class RegistrationController extends Controller
 {
-    public function handleRegistration(Request $request)
+    public function register(Request $request)
     {
         $body = $request->getBody();
         if ($this->isPasswordsEquals($body["password"], $body["password2"]) && $this->isMailNotExist($body["email"])) {
@@ -21,7 +21,7 @@ class RegistrationController extends Controller
             } catch (FileSystemException $e) {
                 Application::$app->response->setStatusCode(Response::HTTP_SERVER_ERROR);
             }
-
+//             Old version
 //            $registerModel = (new User())->assign($body);
 //            $registerModel->save();
             $user = new User($body['username'], $body['email'], $body['password']);

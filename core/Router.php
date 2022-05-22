@@ -19,12 +19,12 @@ class Router
     }
 
 
-    public function get($path, $callback)
+    public function setGetPath($path, $callback)
     {
         $this->routes['get'][$path] = $callback;
     }
 
-    public function post($path, $callback)
+    public function setPostPath($path, $callback)
     {
         $this->routes['post'][$path] = $callback;
     }

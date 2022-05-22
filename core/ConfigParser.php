@@ -18,7 +18,7 @@ class ConfigParser
         $configFile = file($this->configFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach ($configFile as $line) {
             if ($line[0] !== '#' && $line[0] !== '{' && $line[0] !== '}') {
-                [$key, $value] = explode(':', $line, 2);
+                [$key, $value] = explode(': ', $line, 2);
 
                 $key = substr($key, 3);
                 $key = substr($key, 0, -1);

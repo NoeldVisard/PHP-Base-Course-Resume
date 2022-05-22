@@ -21,10 +21,10 @@ if (getenv('APP_ENV') === 'dev') {
 
 $app = new Application();
 
-// Here is created a mapping of paths and files to open.0
-$app->router->get('/', 'welcome');
-$app->router->get('/registration', [new RegistrationController(), 'registration']);
-$app->router->post('/registrationController', [new RegistrationController(), 'handleRegistration']);
-$app->router->get('/404', [new NotFoundController(), 'notFound']);
+// Here is created a mapping of paths and files to open.
+$app->router->setGetPath('/', 'welcome');
+$app->router->setGetPath('/registration', [new RegistrationController(), 'registration']);
+$app->router->setPostPath('/registrationController', [new RegistrationController(), 'register']);
+$app->router->setGetPath('/404', [new NotFoundController(), 'notFound']);
 
 $app->run();
