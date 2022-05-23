@@ -21,10 +21,12 @@ class LoginController extends Controller
         $this->loginServices = new LoginServices();
 
         $user = $this->loginServices->isUserExists($body['email']);
-        if ($user) {
+        if ($user && $this->loginServices->isPasswordEquals($body['password'], $user->getPassword())) {
             $_SERVER['PHP_AUTH_STATE'] = true;
         } else {
-            echo "FALSE";
+            header('HTTP/1.1 401 Unauthorized');
+            header("Location: http://localhost:8080/login");
+
         }
     }
 

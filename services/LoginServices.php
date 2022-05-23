@@ -22,4 +22,14 @@ class LoginServices
         }
     }
 
+    public function isPasswordEquals(String $enteredPassword, String $correctPassword): bool
+    {
+        if (strcmp($enteredPassword, $correctPassword) === 0) {
+            echo "PASSWORD:EQUALS";
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
