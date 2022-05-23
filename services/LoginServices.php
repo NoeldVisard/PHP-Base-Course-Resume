@@ -7,12 +7,20 @@ use app\mappers\UserMapper;
 
 class LoginServices
 {
+    public function canBeLogin(array $body): bool
+    {
+        $user = $this->isUserExists($body['email']);
+        if ($user && $this->isPasswordEquals($body['password'], $user->getPassword())) {
+            return true;
+        }
+        return false;
+    }
+
     public function isUserExists(String $email): ?Model
     {
         try {
             $user = (new UserMapper())->findByEmail($email);
         } catch (\PDOException $e) {
-            $e->getMessage();
             return null;
         }
         if ($user) {
@@ -25,7 +33,6 @@ class LoginServices
     public function isPasswordEquals(String $enteredPassword, String $correctPassword): bool
     {
         if (strcmp($enteredPassword, $correctPassword) === 0) {
-            echo "PASSWORD:EQUALS";
             return true;
         } else {
             return false;

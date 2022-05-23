@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
+use app\core\Response;
 use app\services\LoginServices;
 
 class LoginController extends Controller
 {
-    private LoginServices $loginServices;
-
     public function loginPage()
     {
         $this->render('login');
@@ -18,13 +18,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $body = $request->getBody();
-        $this->loginServices = new LoginServices();
+        $loginServices = new LoginServices();
 
-        $user = $this->loginServices->isUserExists($body['email']);
-        if ($user && $this->loginServices->isPasswordEquals($body['password'], $user->getPassword())) {
+        if ($loginServices->canBeLogin($body)) {
             $_SERVER['PHP_AUTH_STATE'] = true;
         } else {
-            header('HTTP/1.1 401 Unauthorized');
+            Application::$app->response->setStatusCode(Response::HTTP_UNAUTHORIZED);
             header("Location: http://localhost:8080/login");
 
         }
