@@ -3,4 +3,10 @@ CREATE TABLE IF NOT EXISTS "user" (
     username text,
     email text,
     password text
+);
+
+CREATE TABLE IF NOT EXISTS task (
+    id serial primary key,
+    text text,
+    user_id int references "user" (id)
 )

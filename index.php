@@ -7,6 +7,7 @@ namespace app;
 use app\controllers\LoginController;
 use app\controllers\NotFoundController;
 use app\controllers\RegistrationController;
+use app\controllers\TasksController;
 use app\core\Application;
 use app\core\ConfigParser;
 
@@ -29,5 +30,7 @@ $app->router->setPostPath('/registrationController', [new RegistrationController
 $app->router->setGetPath('/404', [new NotFoundController(), 'notFound']);
 $app->router->setGetPath('/login', [new LoginController(), 'loginPage']);
 $app->router->setPostPath('/loginController', [new LoginController(), 'login']);
+$app->router->setGetPath('/tasks', [new TasksController(), 'tasksPage']);
+$app->router->setPostPath('/addTaskController', [new TasksController(), 'addTask']);
 
 $app->run();
