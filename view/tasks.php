@@ -15,7 +15,9 @@ ToDoList
 if ($tasks){
     echo "<ul>";
     foreach ($tasks as $task) {
-        echo "<li><form action='http://localhost:8080/deleteTaskController'><input type='submit' value='x'> " . $task->getText() . ";</li>";
+        $taskId = $task->getId();
+        echo "<li><form action='http://localhost:8080/deleteTaskController' method='post'><input type='submit' value='x' name='id$taskId'></form> "
+            . $task->getText() . ";</li>";
     }
     echo "</ul>";
 }
@@ -25,4 +27,7 @@ if ($tasks){
 </body>
 
 <style>
+    li {
+        display: flex;
+    }
 </style>

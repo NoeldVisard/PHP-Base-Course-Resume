@@ -27,4 +27,12 @@ class TasksController extends Controller
         }
 
     }
+
+    public function deleteTask(Request $request)
+    {
+        $body = $request->getBody();
+        $task = key($body);
+        (new TasksServices())->deleteTask($task);
+        header("Location: http://localhost:8080/tasks");
+    }
 }

@@ -28,9 +28,9 @@ abstract class Mapper
         $this->doUpdate($model);
     }
 
-    public function delete(Model $model): void
+    public function delete(int $id): void
     {
-        $this->doDelete($model);
+        $this->doDelete($id);
     }
 
     public function insert(Model $model): Model
@@ -74,7 +74,7 @@ abstract class Mapper
 
     abstract protected function doInsert(Model $object): Model;
     abstract protected function doUpdate(Model $object): void;
-    abstract protected function doDelete(Model $object): void;
+    abstract protected function doDelete(int $id): void;
     abstract protected function doCreate(array $object): Model;
     abstract protected function select(): \PDOStatement;
     abstract protected function selectAll(): \PDOStatement;

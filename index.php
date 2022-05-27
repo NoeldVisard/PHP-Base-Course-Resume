@@ -32,5 +32,6 @@ $app->router->setGetPath('/login', [new LoginController(), 'loginPage']);
 $app->router->setPostPath('/loginController', [new LoginController(), 'login']);
 $app->router->setGetPath('/tasks', [new TasksController(), 'tasksPage']);
 $app->router->setPostPath('/addTaskController', [new TasksController(), 'addTask']);
+$app->router->setPostPath('/deleteTaskController', [new TasksController(), 'deleteTask']);
 
 $app->run();

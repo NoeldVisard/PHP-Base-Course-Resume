@@ -36,4 +36,11 @@ class TasksServices extends SiteServices
         return $tasks;
     }
 
+    public function deleteTask(string $task)
+    {
+        $taskId = (int) substr($task, 2);
+        $taskMapper = new TaskMapper();
+        $taskMapper->delete($taskId);
+    }
+
 }
