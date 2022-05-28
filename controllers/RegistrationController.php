@@ -34,6 +34,7 @@ class RegistrationController extends Controller
 
 //            $rows = $mapper->findAll()->getNextRow();
 //            var_dump($rows->current());
+            header("Location: http://localhost:8080/login");
         }
     }
 

@@ -20,7 +20,7 @@ class TaskMapper extends Mapper
     public function __construct()
     {
         parent:: __construct();
-        $this->update = $this->getPdo()->prepare("UPDATE task SET text = :text, user_id = :user_id WHERE id = :id");
+        $this->update = $this->getPdo()->prepare("UPDATE task SET text = :text WHERE id = :id");
         $this->delete = $this->getPdo()->prepare("DELETE FROM task WHERE id = :id");
         $this->insert = $this->getPdo()->prepare("INSERT INTO task (text, user_id) VALUES (:text, :user_id)");
         $this->find = $this->getPdo()->prepare("SELECT * FROM task WHERE id = :id");
@@ -49,8 +49,7 @@ class TaskMapper extends Mapper
             $this->update->execute(
                 [
                     'id' => $object->getId(),
-                    'text' => $object->getText(),
-                    'user_id' => $object->getUserId()
+                    'text' => $object->getText()
                 ]
             );
         } catch (\PDOException $e) {

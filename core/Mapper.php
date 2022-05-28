@@ -23,7 +23,7 @@ abstract class Mapper
 //
 //    }
 
-    public function update(Model $model): Model
+    public function update(Model $model): void
     {
         $this->doUpdate($model);
     }

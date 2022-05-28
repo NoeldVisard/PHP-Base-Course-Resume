@@ -35,4 +35,21 @@ class TasksController extends Controller
         (new TasksServices())->deleteTask($task);
         header("Location: http://localhost:8080/tasks");
     }
+
+    public function editTaskPage(Request $request)
+    {
+        $body = $request->getBody();
+        $taskServices = new TasksServices();
+        $task = $taskServices->getTaskById(key($body));
+        $taskServices->setEditTaskId(key($body));
+        $this->render('taskEdit', ['task' => $task]);
+    }
+
+    public function editTask(Request $request)
+    {
+        $body = $request->getBody();
+        var_dump($body);
+        (new TasksServices())->editTask($_COOKIE['PHP_EDIT_TASK_ID'], $body['text']);
+        header("Location: http://localhost:8080/tasks");
+    }
 }

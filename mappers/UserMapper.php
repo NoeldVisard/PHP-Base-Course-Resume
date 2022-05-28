@@ -62,12 +62,12 @@ class UserMapper extends Mapper
         }
     }
 
-    protected function doDelete(Model $object): void
+    protected function doDelete(int $id): void
     {
         try {
             $this->delete->execute(
                 [
-                    'id' => $object->getId()
+                    'id' => $id
                 ]
             );
         } catch (\PDOException $e) {

@@ -16,8 +16,8 @@ if ($tasks){
     echo "<ul>";
     foreach ($tasks as $task) {
         $taskId = $task->getId();
-        echo "<li><form action='http://localhost:8080/deleteTaskController' method='post'><input type='submit' value='x' name='id$taskId'></form> "
-            . $task->getText() . ";</li>";
+        echo "<li><form action='http://localhost:8080/deleteTaskController' method='post'><input type='submit' value='x' name='id$taskId'></form><form action='http://localhost:8080/editTaskController' method='post'><input type='submit' value='Edit' name='id$taskId'></form> "
+            . $task->getText() . "</li>";
     }
     echo "</ul>";
 }

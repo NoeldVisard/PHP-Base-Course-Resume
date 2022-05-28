@@ -25,6 +25,7 @@ $app = new Application();
 
 // Here is created a mapping of paths and files to open.
 $app->router->setGetPath('/', 'welcome');
+//$app->router->setGetPath('/', [new TasksController(), 'tasksPage']);
 $app->router->setGetPath('/registration', [new RegistrationController(), 'registrationPage']);
 $app->router->setPostPath('/registrationController', [new RegistrationController(), 'registration']);
 $app->router->setGetPath('/404', [new NotFoundController(), 'notFound']);
@@ -33,5 +34,7 @@ $app->router->setPostPath('/loginController', [new LoginController(), 'login']);
 $app->router->setGetPath('/tasks', [new TasksController(), 'tasksPage']);
 $app->router->setPostPath('/addTaskController', [new TasksController(), 'addTask']);
 $app->router->setPostPath('/deleteTaskController', [new TasksController(), 'deleteTask']);
+$app->router->setPostPath('/editTaskController', [new TasksController(), 'editTaskPage']);
+$app->router->setPostPath('/editTask', [new TasksController(), 'editTask']);
 
 $app->run();

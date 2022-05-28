@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app\services;
 
+use app\core\Model;
 use app\mappers\TaskMapper;
 use app\models\Task;
 
@@ -42,5 +43,28 @@ class TasksServices extends SiteServices
         $taskMapper = new TaskMapper();
         $taskMapper->delete($taskId);
     }
+
+    public function getTaskById(int|string $key): Model
+    {
+        $id = (int) substr($key, 2);
+        $taskMapper = new TaskMapper();
+        return $taskMapper->find($id);
+    }
+
+    public function setEditTaskId(string $key): void
+    {
+        $taskId = substr($key, 2);
+        setcookie('PHP_EDIT_TASK_ID', $taskId);
+    }
+
+    public function editTask(int $taskId, string $newText)
+    {
+        echo "editTask $taskId $newText";
+        $taskMapper = new TaskMapper();
+        $userId = $taskMapper->find($taskId)->getUserId();
+        $newTask = $taskMapper->create(array('text' => $newText, 'user_id' => $userId,'id' => $taskId ));
+        $taskMapper->update($newTask);
+    }
+
 
 }
