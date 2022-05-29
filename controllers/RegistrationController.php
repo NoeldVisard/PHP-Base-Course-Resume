@@ -27,6 +27,7 @@ class RegistrationController extends Controller
             $user = new User($body['username'], $body['email'], $body['password']);
             $mapper = new UserMapper();
             $mapper->insert($user);
+            header("Location: http://localhost:8080/login");
 
 //             Examples
 //            $user = $mapper->find(11);
@@ -53,11 +54,6 @@ class RegistrationController extends Controller
             fwrite($file, $key . ":" . $value . PHP_EOL);
         }
         fclose($file);
-
-        echo '<pre>';
-        var_dump($body);
-        echo '</pre>';
-
     }
 
     private function isPasswordsEquals(string $password, string $password2) : bool
