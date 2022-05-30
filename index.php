@@ -7,6 +7,7 @@ namespace app;
 use app\controllers\LoginController;
 use app\controllers\NotFoundController;
 use app\controllers\ProfileController;
+use app\controllers\ProfileEditController;
 use app\controllers\RegistrationController;
 use app\core\Application;
 use app\core\ConfigParser;
@@ -31,5 +32,7 @@ $app->router->setGetPath('/404', [new NotFoundController(), 'notFound']);
 $app->router->setGetPath('/login', [new LoginController(), 'loginPage']);
 $app->router->setPostPath('/loginController', [new LoginController(), 'login']);
 $app->router->setGetPath('/profile', [new ProfileController(), 'profilePage']);
+$app->router->setGetPath('/profileEdit', [new ProfileEditController(), 'profileEditPage']);
+$app->router->setPostPath('/profileEditController', [new ProfileEditController(), 'profileEdit']);
 
 $app->run();

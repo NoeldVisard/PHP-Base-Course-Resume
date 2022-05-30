@@ -45,7 +45,7 @@ class UserMapper extends Mapper
         return $object;
     }
 
-    protected function doUpdate(Model $object): void
+    protected function doUpdate(Model $object): Model
     {
         try {
             $this->update->execute(
@@ -56,9 +56,12 @@ class UserMapper extends Mapper
                     'password' => $object->getPassword()
                 ]
             );
+            $rowId = $this->getPdo()->lastInsertId();
+            $object->setId((int)$rowId);
         } catch (\PDOException $e) {
             echo $e->getMessage();
         }
+        return $object;
     }
 
     protected function doDelete(Model $object): void

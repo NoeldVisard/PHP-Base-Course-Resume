@@ -20,7 +20,7 @@ abstract class Mapper
 
     public function update(Model $model): Model
     {
-        $this->doUpdate($model);
+        return $this->doUpdate($model);
     }
 
     public function delete(Model $model): void
@@ -68,7 +68,7 @@ abstract class Mapper
     }
 
     abstract protected function doInsert(Model $object): Model;
-    abstract protected function doUpdate(Model $object): void;
+    abstract protected function doUpdate(Model $object): Model;
     abstract protected function doDelete(Model $object): void;
     abstract protected function doCreate(array $object): Model;
     abstract protected function select(): \PDOStatement;

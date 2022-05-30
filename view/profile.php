@@ -14,9 +14,14 @@
     echo $user->getEmail() . "<br>";
     ?>
 
-    <form action="http://localhost:8080/resume" method="get">
-        <input type="submit" value="Resume">
-    </form>
+    <div class="inline-block">
+        <form action="http://localhost:8080/resume" method="get">
+            <input type="submit" value="Resume">
+        </form>
+        <form action="http://localhost:8080/profileEdit" method="get">
+            <input type="submit" value="Edit profile">
+        </form>
+    </div>
 </div>
 <div class="right-side">Right</div>
 </div>

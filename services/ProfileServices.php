@@ -14,4 +14,13 @@ class ProfileServices
         $user = $userMapper->find($id);
         return $user;
     }
+
+    public function editUser(string $newUsername, string $newPassword)
+    {
+        $userMapper = new UserMapper();
+        $user = $this->getUserById();
+        $user->setUsername($newUsername);
+        $user->setPassword($newPassword);
+        $userMapper->update($user);
+    }
 }
