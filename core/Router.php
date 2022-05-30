@@ -55,8 +55,11 @@ class Router
         throw new Exception("Not existing type");
     }
 
-    public function renderView($template)
+    public function renderView($template, array $params = [])
     {
+        foreach ($params as $key => $value){
+            $$key = $value;
+        }
         require_once __DIR__."/../view/$template.php";
     }
 }

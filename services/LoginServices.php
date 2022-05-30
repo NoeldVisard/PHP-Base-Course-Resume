@@ -10,7 +10,12 @@ class LoginServices
     public function canLogin(array $body): bool
     {
         $user = $this->isUserExists($body['email']);
-        return ($user && $this->isPasswordEquals($body['password'], $user->getPassword()));
+        if ($user && $this->isPasswordEquals($body['password'], $user->getPassword())){
+            setcookie('PHP_AUTH_USER_ID', $user->getId());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function isUserExists(String $email): ?Model
