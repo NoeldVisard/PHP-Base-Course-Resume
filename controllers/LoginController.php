@@ -20,12 +20,11 @@ class LoginController extends Controller
         $body = $request->getBody();
         $loginServices = new LoginServices();
 
-        if ($loginServices->canBeLogin($body)) {
+        if ($loginServices->canLogin($body)) {
             $_SERVER['PHP_AUTH_STATE'] = true;
         } else {
             Application::$app->response->setStatusCode(Response::HTTP_UNAUTHORIZED);
             header("Location: http://localhost:8080/login");
-
         }
     }
 

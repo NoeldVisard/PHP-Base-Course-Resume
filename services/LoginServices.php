@@ -7,25 +7,17 @@ use app\mappers\UserMapper;
 
 class LoginServices
 {
-    public function canBeLogin(array $body): bool
+    public function canLogin(array $body): bool
     {
         $user = $this->isUserExists($body['email']);
-        if ($user && $this->isPasswordEquals($body['password'], $user->getPassword())) {
-            return true;
-        }
-        return false;
+        return ($user && $this->isPasswordEquals($body['password'], $user->getPassword()));
     }
 
     public function isUserExists(String $email): ?Model
     {
         try {
-            $user = (new UserMapper())->findByEmail($email);
+            return (new UserMapper())->findByEmail($email);
         } catch (\PDOException $e) {
-            return null;
-        }
-        if ($user) {
-            return $user;
-        } else {
             return null;
         }
     }

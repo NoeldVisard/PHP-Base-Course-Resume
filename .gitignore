@@ -1,5 +1,5 @@
 /vendor/
+/runtime/
 .idea
 .env
 env.json
-runtime/logFile.txt

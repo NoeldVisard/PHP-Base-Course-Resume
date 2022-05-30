@@ -9,18 +9,15 @@ use app\core\Response;
 use app\exceptions\FileSystemException;
 use app\mappers\UserMapper;
 use app\models\User;
+use app\services\RegistrationServices;
 
 class RegistrationController extends Controller
 {
     public function registration(Request $request)
     {
         $body = $request->getBody();
-        if ($this->isPasswordsEquals($body["password"], $body["password2"]) && $this->isMailNotExist($body["email"])) {
-            try {
-                $this->writeBody($body);
-            } catch (FileSystemException $e) {
-                Application::$app->response->setStatusCode(Response::HTTP_SERVER_ERROR);
-            }
+        $registrationServices = new RegistrationServices();
+        if ($registrationServices->canRegister($body["password"], $body["password2"], $body["email"])) {
 //             Old version
 //            $registerModel = (new User())->assign($body);
 //            $registerModel->save();
@@ -28,13 +25,8 @@ class RegistrationController extends Controller
             $mapper = new UserMapper();
             $mapper->insert($user);
             header("Location: http://localhost:8080/login");
-
-//             Examples
-//            $user = $mapper->find(11);
-//            var_dump($user);
-
-//            $rows = $mapper->findAll()->getNextRow();
-//            var_dump($rows->current());
+        } else {
+            header("Location: http://localhost:8080/registration");
         }
     }
 
@@ -44,26 +36,4 @@ class RegistrationController extends Controller
         $this->render($template);
     }
 
-    private function writeBody(array $body)
-    {
-        $file = fopen("../body.txt", "w+");
-        if ($file === false) {
-            throw new FileSystemException("File not exist");
-        }
-        foreach ($body as $key => $value) {
-            fwrite($file, $key . ":" . $value . PHP_EOL);
-        }
-        fclose($file);
-    }
-
-    private function isPasswordsEquals(string $password, string $password2) : bool
-    {
-        return $password === $password2;
-    }
-
-    private function isMailNotExist(mixed $email): bool
-    {
-        // TODO: isMailNotExist in database
-        return true;
-    }
 }

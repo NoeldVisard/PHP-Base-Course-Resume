@@ -18,11 +18,6 @@ abstract class Mapper
         return $this->doCreate($object);
     }
 
-//    public function read(): Model
-//    {
-//
-//    }
-
     public function update(Model $model): Model
     {
         $this->doUpdate($model);

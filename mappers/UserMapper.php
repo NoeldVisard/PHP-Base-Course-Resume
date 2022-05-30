@@ -21,7 +21,6 @@ class UserMapper extends Mapper
     public function __construct()
     {
         parent:: __construct();
-//        $this->select = $this->getPdo()->prepare("SELECT * FROM \"user\" WHERE id = ?");
         $this->update = $this->getPdo()->prepare("UPDATE \"user\" SET username = :username, email = :email, password = :password WHERE id = :id");
         $this->delete = $this->getPdo()->prepare("DELETE FROM \"user\" WHERE id = :id");
         $this->insert = $this->getPdo()->prepare("INSERT INTO \"user\" (username, email, password) VALUES (:username, :email, :password)");
