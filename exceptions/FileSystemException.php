@@ -6,9 +6,9 @@ class FileSystemException extends \Exception
 {
 
     /**
-     * @param string $string
+     * @param string $message
      */
-    public function __construct(string $string)
+    public function __construct(string $message)
     {
     }
 }

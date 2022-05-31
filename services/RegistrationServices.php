@@ -5,13 +5,24 @@ namespace app\services;
 use app\core\Application;
 use app\core\Response;
 use app\exceptions\FileSystemException;
+use app\exceptions\IncorrectSignUpException;
 use app\mappers\UserMapper;
 
 class RegistrationServices
 {
     public function canRegister(string $password, string $password2, string $email): bool
     {
-        return $this->isPasswordsEquals($password, $password2) && $this->isMailNotExist($email);
+        try {
+            $canRegister = $this->isPasswordsEquals($password, $password2) && $this->isMailNotExist($email);
+            if ($canRegister) {
+                return true;
+            } else {
+                throw new IncorrectSignUpException("Incorrect password or mail exists");
+            }
+        } catch (IncorrectSignUpException $e) {
+            echo $e;
+            return false;
+        }
     }
 
     public function isPasswordsEquals(mixed $password, mixed $password2): bool
