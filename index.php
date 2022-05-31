@@ -9,6 +9,7 @@ use app\controllers\NotFoundController;
 use app\controllers\ProfileController;
 use app\controllers\ProfileEditController;
 use app\controllers\RegistrationController;
+use app\controllers\ResumeController;
 use app\core\Application;
 use app\core\ConfigParser;
 
@@ -34,5 +35,8 @@ $app->router->setPostPath('/loginController', [new LoginController(), 'login']);
 $app->router->setGetPath('/profile', [new ProfileController(), 'profilePage']);
 $app->router->setGetPath('/profileEdit', [new ProfileEditController(), 'profileEditPage']);
 $app->router->setPostPath('/profileEditController', [new ProfileEditController(), 'profileEdit']);
+$app->router->setGetPath('/resume', [new ResumeController(), 'resumePage']);
+$app->router->setGetPath('/resumeEditPage', [new ResumeController(), 'resumeEditPage']);
+$app->router->setPostPath('/resumeEdit', [new ResumeController(), 'resumeEdit']);
 
 $app->run();
