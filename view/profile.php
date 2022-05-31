@@ -8,6 +8,7 @@
 <div class="left-side">Left</div>
 <div class="center">
     <div class="profile">Profile</div>
+    <img src="/view/assets/user.png" alt="user"><br>
 
     <?php
     echo $user->getUsername() . "<br>";
@@ -63,6 +64,11 @@
 
     .profile {
 
+    }
+
+    img {
+        height: 100px;
+        width: 100px;
     }
 </style>
 </html>

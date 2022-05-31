@@ -9,6 +9,7 @@
     <div class="center">
         <div class="profile">Resume</div>
         <div class="inline-block">
+            <img src="/view/assets/user.png" alt="user">
             <form action="http://localhost:8080/profile" method="get">
                 <input type="submit" value="Profile">
             </form>
@@ -17,7 +18,19 @@
             </form>
         </div>
         <?php
-        var_dump($resume);
+        if ($resume) {
+            echo "<div class='content'>";
+            echo "<div class='block'>Telegram: <div class='info'>@" . $resume->getTelegram() . "</div></div>";
+            echo "<div class='block'>Phone: <div class='info'>" . $resume->getPhone() . "</div></div>";
+            echo "<div class='block'>Skills: <div class='info'>" . $resume->getSkills() . "</div></div>";
+            echo "<div class='block'>Experience: <div class='info'>" . $resume->getExperience() . "</div></div>";
+            echo "<div class='block'>Education: <div class='info'>" . $resume->getEducation() . "</div></div>";
+            echo "<div class='block'>Courses: <div class='info'>" . $resume->getCourses() . "</div></div>";
+            echo "<div class='block'>Projects: <div class='info'>" . $resume->getProjects() . "</div></div>";
+            echo "</div>";
+        } else {
+            echo "No resume added";
+        }
         ?>
     </div>
     <div class="right-side">Right</div>
@@ -60,6 +73,31 @@
 
     .profile {
 
+    }
+
+    .content {
+        text-align: left;
+    }
+
+    img {
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+    }
+
+    .block {
+        padding: 20px;
+        background: #e0dede;
+        border-top: 2px solid cornflowerblue;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .info {
+        position: fixed;
+        display: inline-block;
+        left: 35%;
+        color: #696969;
     }
 </style>
 </html>
